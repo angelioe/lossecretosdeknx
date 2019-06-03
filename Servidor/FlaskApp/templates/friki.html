@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .btn {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+        background-color: #367f39;
+    }
+    /* Button used to open the contact form - fixed at the bottom of the page */
+    .open-button {
+      background-color: #555;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.8;
+      position: fixed;
+      bottom: 23px;
+      right: 28px;
+      width: 280px;
+    }
+
+    /* The popup form - hidden by default */
+    .form-popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      right: 15px;
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+      max-width: 300px;
+      padding: 10px;
+      background-color: white;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom:10px;
+      opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+      background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+      opacity: 1;
+      }
+    </style>
+
+    <title>KNX</title>
+    <script type="text/javascript" src="/static/scripts/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
+            socket.on('my_response', function(msg) {
+
+                var sys = String(msg.sdata);
+                var system = JSON.parse(sys);
+                var tel = String(msg.data);
+                var telegrams = JSON.parse(tel);
+
+                //Telegrams
+                try{
+                    $('#idd0').text(telegrams.telegrams[0].idd).html();
+                    $('#dated0').text(telegrams.telegrams[0].dated).html();
+                    $('#cond0').text(telegrams.telegrams[0].controllerd).html();
+                    $('#devd0').text(telegrams.telegrams[0].deviced).html();
+                    $('#fund0').text(telegrams.telegrams[0].functiond).html();
+                    $('#vald0').text(telegrams.telegrams[0].valued).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#idd1').text(telegrams.telegrams[1].idd).html();
+                    $('#dated1').text(telegrams.telegrams[1].dated).html();
+                    $('#cond1').text(telegrams.telegrams[1].controllerd).html();
+                    $('#devd1').text(telegrams.telegrams[1].deviced).html();
+                    $('#fund1').text(telegrams.telegrams[1].functiond).html();
+                    $('#vald1').text(telegrams.telegrams[1].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd2').text(telegrams.telegrams[2].idd).html();
+                    $('#dated2').text(telegrams.telegrams[2].dated).html();
+                    $('#cond2').text(telegrams.telegrams[2].controllerd).html();
+                    $('#devd2').text(telegrams.telegrams[2].deviced).html();
+                    $('#fund2').text(telegrams.telegrams[2].functiond).html();
+                    $('#vald2').text(telegrams.telegrams[2].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd3').text(telegrams.telegrams[3].idd).html();
+                    $('#dated3').text(telegrams.telegrams[3].dated).html();
+                    $('#cond3').text(telegrams.telegrams[3].controllerd).html();
+                    $('#devd3').text(telegrams.telegrams[3].deviced).html();
+                    $('#fund3').text(telegrams.telegrams[3].functiond).html();
+                    $('#vald3').text(telegrams.telegrams[3].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd4').text(telegrams.telegrams[4].idd).html();
+                    $('#dated4').text(telegrams.telegrams[4].dated).html();
+                    $('#cond4').text(telegrams.telegrams[4].controllerd).html();
+                    $('#devd4').text(telegrams.telegrams[4].deviced).html();
+                    $('#fund4').text(telegrams.telegrams[4].functiond).html();
+                    $('#vald4').text(telegrams.telegrams[4].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd5').text(telegrams.telegrams[5].idd).html();
+                    $('#dated5').text(telegrams.telegrams[5].dated).html();
+                    $('#cond5').text(telegrams.telegrams[5].controllerd).html();
+                    $('#devd5').text(telegrams.telegrams[5].deviced).html();
+                    $('#fund5').text(telegrams.telegrams[5].functiond).html();
+                    $('#vald5').text(telegrams.telegrams[5].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd6').text(telegrams.telegrams[6].idd).html();
+                    $('#dated6').text(telegrams.telegrams[6].dated).html();
+                    $('#cond6').text(telegrams.telegrams[6].controllerd).html();
+                    $('#devd6').text(telegrams.telegrams[6].deviced).html();
+                    $('#fund6').text(telegrams.telegrams[6].functiond).html();
+                    $('#vald6').text(telegrams.telegrams[6].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd7').text(telegrams.telegrams[7].idd).html();
+                    $('#dated7').text(telegrams.telegrams[7].dated).html();
+                    $('#cond7').text(telegrams.telegrams[7].controllerd).html();
+                    $('#devd7').text(telegrams.telegrams[7].deviced).html();
+                    $('#fund7').text(telegrams.telegrams[7].functiond).html();
+                    $('#vald7').text(telegrams.telegrams[7].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd8').text(telegrams.telegrams[8].idd).html();
+                    $('#dated8').text(telegrams.telegrams[8].dated).html();
+                    $('#cond8').text(telegrams.telegrams[8].controllerd).html();
+                    $('#devd8').text(telegrams.telegrams[8].deviced).html();
+                    $('#fund8').text(telegrams.telegrams[8].functiond).html();
+                    $('#vald8').text(telegrams.telegrams[8].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                try{
+                    $('#idd9').text(telegrams.telegrams[9].idd).html();
+                    $('#dated9').text(telegrams.telegrams[9].dated).html();
+                    $('#cond9').text(telegrams.telegrams[9].controllerd).html();
+                    $('#devd9').text(telegrams.telegrams[9].deviced).html();
+                    $('#fund9').text(telegrams.telegrams[9].functiond).html();
+                    $('#vald9').text(telegrams.telegrams[9].valued).html();
+                    }
+                catch(err){var e=err;}
+
+                //SYSTEM_LOG
+                try{
+                    $('#ids0').text(system.logs[0].ids).html();
+                    $('#dates0').text(system.logs[0].dates).html();
+                    $('#cons0').text(system.logs[0].controllers).html();
+                    $('#devs0').text(system.logs[0].devices).html();
+                    $('#funs0').text(system.logs[0].functions).html();
+                    $('#vals0').text(system.logs[0].values).html();
+                    $('#stas0').text(system.logs[0].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids1').text(system.logs[1].ids).html();
+                    $('#dates1').text(system.logs[1].dates).html();
+                    $('#cons1').text(system.logs[1].controllers).html();
+                    $('#devs1').text(system.logs[1].devices).html();
+                    $('#funs1').text(system.logs[1].functions).html();
+                    $('#vals1').text(system.logs[1].values).html();
+                    $('#stas1').text(system.logs[1].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids2').text(system.logs[2].ids).html();
+                    $('#dates2').text(system.logs[2].dates).html();
+                    $('#cons2').text(system.logs[2].controllers).html();
+                    $('#devs2').text(system.logs[2].devices).html();
+                    $('#funs2').text(system.logs[2].functions).html();
+                    $('#vals2').text(system.logs[2].values).html();
+                    $('#stas2').text(system.logs[2].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids3').text(system.logs[3].ids).html();
+                    $('#dates3').text(system.logs[3].dates).html();
+                    $('#cons3').text(system.logs[3].controllers).html();
+                    $('#devs3').text(system.logs[3].devices).html();
+                    $('#funs3').text(system.logs[3].functions).html();
+                    $('#vals3').text(system.logs[3].values).html();
+                    $('#stas3').text(system.logs[3].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids4').text(system.logs[4].ids).html();
+                    $('#dates4').text(system.logs[4].dates).html();
+                    $('#cons4').text(system.logs[4].controllers).html();
+                    $('#devs4').text(system.logs[4].devices).html();
+                    $('#funs4').text(system.logs[4].functions).html();
+                    $('#vals4').text(system.logs[4].values).html();
+                    $('#stas4').text(system.logs[4].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids5').text(system.logs[5].ids).html();
+                    $('#dates5').text(system.logs[5].dates).html();
+                    $('#cons5').text(system.logs[5].controllers).html();
+                    $('#devs5').text(system.logs[5].devices).html();
+                    $('#funs5').text(system.logs[5].functions).html();
+                    $('#vals5').text(system.logs[5].values).html();
+                    $('#stas5').text(system.logs[5].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids6').text(system.logs[6].ids).html();
+                    $('#dates6').text(system.logs[6].dates).html();
+                    $('#cons6').text(system.logs[6].controllers).html();
+                    $('#devs6').text(system.logs[6].devices).html();
+                    $('#funs6').text(system.logs[6].functions).html();
+                    $('#vals6').text(system.logs[6].values).html();
+                    $('#stas6').text(system.logs[6].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids7').text(system.logs[7].ids).html();
+                    $('#dates7').text(system.logs[7].dates).html();
+                    $('#cons7').text(system.logs[7].controllers).html();
+                    $('#devs7').text(system.logs[7].devices).html();
+                    $('#funs7').text(system.logs[7].functions).html();
+                    $('#vals7').text(system.logs[7].values).html();
+                    $('#stas7').text(system.logs[7].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids8').text(system.logs[8].ids).html();
+                    $('#dates8').text(system.logs[8].dates).html();
+                    $('#cons8').text(system.logs[8].controllers).html();
+                    $('#devs8').text(system.logs[8].devices).html();
+                    $('#funs8').text(system.logs[8].functions).html();
+                    $('#vals8').text(system.logs[8].values).html();
+                    $('#stas8').text(system.logs[8].states).html();
+                    }
+                catch(err){var e=err;}
+                try{
+                    $('#ids9').text(system.logs[9].ids).html();
+                    $('#dates9').text(system.logs[9].dates).html();
+                    $('#cons9').text(system.logs[9].controllers).html();
+                    $('#devs9').text(system.logs[9].devices).html();
+                    $('#funs9').text(system.logs[9].functions).html();
+                    $('#vals9').text(system.logs[9].values).html();
+                    $('#stas9').text(system.logs[9].states).html();
+                    }
+                catch(err){var e=err;}
+
+
+            });
+        });
+    </script>
+</head>
+<title>ANGEL</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/scripts/w3.css">
+<link rel="stylesheet" href="/static/scripts/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:18px">Close Menu</a>
+  <div class="w3-container">
+    <center>
+    <p></p>
+    <img src="/static/images/brainai.png" hspace="10" style="width:80%">
+    <h3 id='title' class="w3-padding-64"><b>Servidor KNX</b></h3>
+    </center>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Inicio</a>
+    <a href="#telegrams" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Telegramas</a>
+    <a href="#system" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Instrucciones</a>
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Servidor KNX</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="memories">
+    <h1 class="w3-jumbo"><b>Zona Friki</b></h1>
+    <p> Aquí es la parte donde se ven los telegramas y las instrucciones tanto pendientes como ejecutadas</p>
+    <form method="POST" class="form-container">
+      <button name="action" class="btn" value="inicio"><i class="fa fa-rotate-left"></i> Volver</button><br>
+    </form>
+  </div>
+
+
+  <!-- Data -->
+  <div class="w3-container" id="telegrams" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Telegramas</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>Últimos Telegramas </p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Controller</th>
+            <th>Device</th>
+            <th>Function</th>
+            <th>Value</th>
+        </tr>
+            <tr>
+                <td id="idd0"></td>
+                <td id="dated0"></td>
+                <td id="cond0"></td>
+                <td id="devd0"></td>
+                <td id="fund0"></td>
+                <td id="vald0"></td>
+              </tr>
+            <tr>
+                <td id="idd1"></td>
+                <td id="dated1"></td>
+                <td id="cond1"></td>
+                <td id="devd1"></td>
+                <td id="fund1"></td>
+                <td id="vald1"></td>
+              </tr>
+            <tr>
+                <td id="idd2"></td>
+                <td id="dated2"></td>
+                <td id="cond2"></td>
+                <td id="devd2"></td>
+                <td id="fund2"></td>
+                <td id="vald2"></td>
+              </tr>
+            <tr>
+                <td id="idd3"></td>
+                <td id="dated3"></td>
+                <td id="cond3"></td>
+                <td id="devd3"></td>
+                <td id="fund3"></td>
+                <td id="vald3"></td>
+              </tr>
+            <tr>
+                <td id="idd4"></td>
+                <td id="dated4"></td>
+                <td id="cond4"></td>
+                <td id="devd4"></td>
+                <td id="fund4"></td>
+                <td id="vald4"></td>
+              </tr>
+            <tr>
+                <td id="idd5"></td>
+                <td id="dated5"></td>
+                <td id="cond5"></td>
+                <td id="devd5"></td>
+                <td id="fund5"></td>
+                <td id="vald5"></td>
+              </tr>
+            <tr>
+                <td id="idd6"></td>
+                <td id="dated6"></td>
+                <td id="cond6"></td>
+                <td id="devd6"></td>
+                <td id="fund6"></td>
+                <td id="vald6"></td>
+              </tr>
+            <tr>
+                <td id="idd7"></td>
+                <td id="dated7"></td>
+                <td id="cond7"></td>
+                <td id="devd7"></td>
+                <td id="fund7"></td>
+                <td id="vald7"></td>
+              </tr>
+            <tr>
+                <td id="idd8"></td>
+                <td id="dated8"></td>
+                <td id="cond8"></td>
+                <td id="devd8"></td>
+                <td id="fund8"></td>
+                <td id="vald8"></td>
+              </tr>
+            <tr>
+                <td id="idd9"></td>
+                <td id="dated9"></td>
+                <td id="cond9"></td>
+                <td id="devd9"></td>
+                <td id="fund9"></td>
+                <td id="vald9"></td>
+              </tr>
+    </table>
+  </div>
+
+  <!-- Instructions -->
+  <div class="w3-container" id="system" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Instrucciones</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>Últimas intrucciones</p>
+    <p id="test_sys"></p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Controller</th>
+            <th>Device</th>
+            <th>Function</th>
+            <th>Value</th>
+            <th>State</th>
+        </tr>
+            <tr>
+                <td id="ids0"></td>
+                <td id="dates0"></td>
+                <td id="cons0"></td>
+                <td id="devs0"></td>
+                <td id="funs0"></td>
+                <td id="vals0"></td>
+                <td id="stas0"></td>
+              </tr>
+            <tr>
+                <td id="ids1"></td>
+                <td id="dates1"></td>
+                <td id="cons1"></td>
+                <td id="devs1"></td>
+                <td id="funs1"></td>
+                <td id="vals1"></td>
+                <td id="stas1"></td>
+              </tr>
+            <tr>
+                <td id="ids2"></td>
+                <td id="dates2"></td>
+                <td id="cons2"></td>
+                <td id="devs2"></td>
+                <td id="funs2"></td>
+                <td id="vals2"></td>
+                <td id="stas2"></td>
+              </tr>
+            <tr>
+                <td id="ids3"></td>
+                <td id="dates3"></td>
+                <td id="cons3"></td>
+                <td id="devs3"></td>
+                <td id="funs3"></td>
+                <td id="vals3"></td>
+                <td id="stas3"></td>
+              </tr>
+            <tr>
+                <td id="ids4"></td>
+                <td id="dates4"></td>
+                <td id="cons4"></td>
+                <td id="devs4"></td>
+                <td id="funs4"></td>
+                <td id="vals4"></td>
+                <td id="stas4"></td>
+              </tr>
+            <tr>
+                <td id="ids5"></td>
+                <td id="dates5"></td>
+                <td id="cons5"></td>
+                <td id="devs5"></td>
+                <td id="funs5"></td>
+                <td id="vals5"></td>
+                <td id="stas5"></td>
+              </tr>
+            <tr>
+                <td id="ids6"></td>
+                <td id="dates6"></td>
+                <td id="cons6"></td>
+                <td id="devs6"></td>
+                <td id="funs6"></td>
+                <td id="vals6"></td>
+                <td id="stas6"></td>
+              </tr>
+            <tr>
+                <td id="ids7"></td>
+                <td id="dates7"></td>
+                <td id="cons7"></td>
+                <td id="devs7"></td>
+                <td id="funs7"></td>
+                <td id="vals7"></td>
+                <td id="stas7"></td>
+              </tr>
+            <tr>
+                <td id="ids8"></td>
+                <td id="dates8"></td>
+                <td id="cons8"></td>
+                <td id="devs8"></td>
+                <td id="funs8"></td>
+                <td id="vals8"></td>
+                <td id="stas8"></td>
+              </tr>
+            <tr>
+                <td id="ids9"></td>
+                <td id="dates9"></td>
+                <td id="cons9"></td>
+                <td id="devs9"></td>
+                <td id="funs9"></td>
+                <td id="vals9"></td>
+                <td id="stas9"></td>
+              </tr>
+    </table>
+
+  </div>
+
+<!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:10px;padding-right:58px"><p class="w3-right">Impulsado por: tu imaginación, a divertirse! - Cualquier duda sera un gusto colaborarte <a href="https://www.linkedin.com/in/angelioe/" title="Google" target="_blank" class="w3-hover-opacity">Aquí</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>

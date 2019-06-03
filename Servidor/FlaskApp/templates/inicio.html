@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .btn {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+        background-color: #367f39;
+    }
+    /* Button used to open the contact form - fixed at the bottom of the page */
+    .open-button {
+      background-color: #555;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.8;
+      position: fixed;
+      bottom: 23px;
+      right: 28px;
+      width: 280px;
+    }
+
+    /* The popup form - hidden by default */
+    .form-popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      right: 15px;
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+      max-width: 300px;
+      padding: 10px;
+      background-color: white;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom:10px;
+      opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+      background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+      opacity: 1;
+      }
+    </style>
+    <title>GIS</title>
+    <script type="text/javascript" src="/static/scripts/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+            socket.on('my_response', function(msg) {
+                var sys = String(msg.sdata);
+                var system = JSON.parse(sys);
+                var tel = String(msg.data);
+                var telegrams = JSON.parse(tel);
+
+            });
+        });
+    </script>
+</head>
+<title>KNX</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/scripts/w3.css">
+<link rel="stylesheet" href="/static/scripts/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:18px">Cerrar Menu</a>
+  <div class="w3-container">
+    <center>
+    <p></p>
+    <img src="/static/images/brainai.png" hspace="10" style="width:80%">
+    <h3 id='title' class="w3-padding-64"><b>Servidor KNX</b></h3>
+    </center>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Inicio</a>
+    <a href="#ebook" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Los Secretos de KNX</a>
+    <a href="#lighting" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Iluminación</a>
+    <a href="#monitor" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Monitor</a>
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Servidor KNX</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="ebook">
+    <h1 class="w3-jumbo"><b>Bienvenido/a</b></h1>
+    <p> “El primer paso es establecer que algo es posible, después probablemente ocurrirá” S. Jobs.</p>
+    <h1 class="w3-xxxlarge w3-text-red"><b>Los Secretos de KNX</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+  </div>
+
+  <!-- Photo grid (modal) -->
+  <div class="w3-row-padding">
+      <img src="/static/images/secretknx.png" style="width:100%" onclick="onClick(this)" alt="Los Secretos de KNX">
+  </div>
+
+  <!-- Modal for full size images on click-->
+  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
+  </div>
+
+  <script>
+    function openForm(id_popup) {
+        var id = id_popup;
+        document.getElementById(id).style.display = "block";}
+    function closeForm(id_popup) {
+        var id = id_popup;
+        document.getElementById(id).style.display = "none";}
+  </script>
+
+  <!-- Living -->
+  <div class="w3-container" id="lighting" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Iluminación</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <button class="btn" onclick="openForm('lv_lso_popup')"><i class="fa fa-lightbulb-o"></i> Techo</button><br>
+    <div class="form-popup" id="lv_lso_popup">
+      <form method="POST" class="form-container">
+        <center><h2 class="w3-xxlarge w3-text-red"><b>Techo</b></h2></center>
+        <button name="action" class="btn" value="knx-1/1/1-bin-1"><i class="fa fa-lightbulb-o"></i> Prender</button><br>
+        <button name="action" class="btn" value="knx-1/1/1-bin-0"><i class="fa fa-lightbulb-o"></i> Apagar</button><br>
+        <button type="button" class="btn cancel" onclick="closeForm('lv_lso_popup')"> Cerrar</button>
+      </form>
+    </div>
+
+    <button class="btn" onclick="openForm('lv_lst_popup')"><i class="fa fa-lightbulb-o"></i> Muro</button><br>
+    <div class="form-popup" id="lv_lst_popup">
+      <form method="POST" class="form-container">
+        <center><h2 class="w3-xxlarge w3-text-red"><b>Muro</b></h2></center>
+        <button name="action" class="btn" value="knx-1/1/2-bin-1"><i class="fa fa-lightbulb-o"></i> Prender</button><br>
+        <button name="action" class="btn" value="knx-1/1/2-bin-0"><i class="fa fa-lightbulb-o"></i> Apagar</button><br>
+        <button type="button" class="btn cancel" onclick="closeForm('lv_lst_popup')"> Cerrar</button>
+      </form>
+    </div>
+
+
+
+  </div>
+
+
+  <!-- Living -->
+  <div class="w3-container" id="monitor" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Monitor</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <form method="POST" class="form-container">
+      <button name="action" class="btn" value="friki"><i class="fa fa-search"></i> Zona Friki</button><br>
+    </form>
+  </div>
+
+
+
+<!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:10px;padding-right:58px"><p class="w3-right">Impulsado por: tu imaginación, a divertirse! - Cualquier duda sera un gusto colaborarte <a href="https://www.linkedin.com/in/angelioe/" title="Google" target="_blank" class="w3-hover-opacity">Aquí</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>
